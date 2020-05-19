@@ -1,0 +1,56 @@
+﻿<Window x:Class="CP.Views.Message"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Height="300" Width="500" ResizeMode="CanResize"  WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True">
+    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction 
+                        Command="{Binding BorderDragCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Grid>
+                <materialDesign:ColorZone Background="#d42b2b" >
+                    <StackPanel HorizontalAlignment="Right">
+                        <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="30" Width="30" Padding="0" Background="#d42b2b" BorderBrush="#d42b2b">
+                            <materialDesign:PackIcon Kind="WindowClose"  Height="30" Width="30"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:ColorZone>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Background="#d42b2b" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Airplane" Width="80" Height="80" Foreground="White" Margin="145,10,0,10" RenderTransformOrigin="0.5,0.5">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
+                <TextBlock Text="Air Flight" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Foreground="#DDFFFFFF"/>
+            </StackPanel>
+        </Grid>
+        <TextBlock TextAlignment="Center" Text="{Binding Path=Message}" Grid.Row="2" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#d42b2b"/>
+    </Grid>
+</Window>
